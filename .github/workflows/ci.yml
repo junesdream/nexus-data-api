@@ -22,11 +22,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        # Wir installieren die Kernpakete direkt, falls requirements.txt nicht reicht
+        pip install fastapi uvicorn prisma pydantic
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Generate Prisma Client
       run: |
-        # Dieser Schritt ist wichtig für nexus-data-api
+        
+        python -m prisma fetch
         python -m prisma generate
 
     - name: Lint with flake8
