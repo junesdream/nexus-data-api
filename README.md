@@ -3,7 +3,7 @@
 A modern, type-safe **Data Access Layer (DAL)** built with FastAPI and Prisma ORM. 
 This service acts as the central state-management engine, providing structured and validated database access for distributed AI systems.
 
-![CI Status](https://github.com/junesdream/nexus-data-api/actions/workflows/ci.yml/badge.svg)
+[![Python CI](https://github.com/junesdream/nexus-data-api/actions/workflows/ci.yml/badge.svg)](https://github.com/junesdream/nexus-data-api/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/Python-3.11+-blue)
 ![Prisma](https://img.shields.io/badge/ORM-Prisma-2D3748)
 ![FastAPI](https://img.shields.io/badge/Framework-FastAPI-009688)
