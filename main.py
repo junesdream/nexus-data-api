@@ -9,8 +9,10 @@ from contextlib import asynccontextmanager
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("nexus-api")
 
+# initialize DB client and API app
 db = Prisma()
 
+# manage DB connection lifecycle (startup / shutdown)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Connecting to DB...")
@@ -18,19 +20,22 @@ async def lifespan(app: FastAPI):
     yield
     logger.info("Disconnecting DB...")
     await db.disconnect()
-
+# initialize DB client and API app
 app = FastAPI(lifespan=lifespan)
 
+# request schema for creating a project (input validation)
 class ProjectCreate(BaseModel):
     """Data model for creating a new project."""
     name: str = Field(..., min_length=1, description="The unique name of the project")
     description: Optional[str] = Field(None, description="Optional project details")
 
+# fetch all projects from DB
 @app.get("/projects")
 async def get_projects():
     projects = await db.project.find_many()
     return [p.dict() for p in projects]
 
+# create new project entry in DB
 @app.post("/projects")
 async def create_project(project: ProjectCreate):
     """Create a new project entry."""
