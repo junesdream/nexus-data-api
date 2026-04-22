@@ -33,7 +33,7 @@ class ProjectCreate(BaseModel):
 @app.get("/projects")
 async def get_projects():
     projects = await db.project.find_many()
-    return [p.dict() for p in projects]
+    return [p.model_dump() for p in projects]
 
 # create new project entry in DB
 @app.post("/projects")
